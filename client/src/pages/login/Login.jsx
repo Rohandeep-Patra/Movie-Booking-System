@@ -1,10 +1,23 @@
 import React from "react";
-import { Form } from "antd";
-import { NavLink } from "react-router-dom";
+import { Form,message } from "antd";
+import { NavLink, useNavigate } from "react-router-dom";
+import { LoginUser } from "../../api/user.api.js";
 
 const Register = () => {
-  const onFinish = (values) => {
-    console.log("Submitted Successfully", values);
+  const navigate = useNavigate()
+  const onFinish = async (values) => {
+    try {
+      const response = await LoginUser(values);
+      if (response.success) {
+        message.success(response.message);
+        localStorage.setItem("token",response.data)
+        navigate('/')
+      } else {
+        message.error(response.message)
+      }
+    } catch (error) {
+      message.error(error.message)
+    }
   };
 
   return (
@@ -15,7 +28,6 @@ const Register = () => {
         </h1>
         <hr />
         <Form layout="vertical" className="mt-6" onFinish={onFinish}>
-          
           <Form.Item
             label="Email"
             name="email"
