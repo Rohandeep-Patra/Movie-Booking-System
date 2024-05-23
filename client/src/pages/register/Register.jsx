@@ -1,9 +1,10 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Form,message } from "antd";
-import { NavLink } from "react-router-dom";
+import { NavLink , useNavigate } from "react-router-dom";
 import { RegisterUser } from "../../api/user.api.js";
 
 const Register = () => {
+  const navigate = useNavigate()
   const onFinish = async (values) => {
     try {
       const response = await RegisterUser(values)
@@ -17,6 +18,11 @@ const Register = () => {
     }
 
   };
+  useEffect(() => {
+    if(localStorage.getItem("token")){
+      navigate('/')
+    }
+  },[])
 
   return (
     <div className="flex justify-center min-h-screen items-center bg-slate-300 p-4">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form,message } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
 import { LoginUser } from "../../api/user.api.js";
@@ -11,7 +11,7 @@ const Register = () => {
       if (response.success) {
         message.success(response.message);
         localStorage.setItem("token",response.data)
-        navigate('/')
+        window.location.href = '/' 
       } else {
         message.error(response.message)
       }
@@ -19,6 +19,14 @@ const Register = () => {
       message.error(error.message)
     }
   };
+
+  useEffect(() => {
+    if(localStorage.getItem("token")){
+      navigate('/')
+    }
+  },[])
+
+
 
   return (
     <div className="flex justify-center min-h-screen items-center bg-slate-300 p-4">
