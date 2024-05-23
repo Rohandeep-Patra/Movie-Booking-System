@@ -2,18 +2,26 @@ import React,{useEffect} from "react";
 import { Form,message } from "antd";
 import { NavLink , useNavigate } from "react-router-dom";
 import { RegisterUser } from "../../api/user.api.js";
+import { useDispatch } from "react-redux";
+import{ShowLoading,HideLoading} from '../../redux/loadersSlice.js'
+
 
 const Register = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const onFinish = async (values) => {
     try {
+      dispatch(ShowLoading())
       const response = await RegisterUser(values)
+      dispatch(HideLoading())
+
       if(response.success){
         message.success(response.message)
       }else{
         message.error(response.message)
       }
     } catch (error) {
+      dispatch(HideLoading())
       message.error(error.message)
     }
 
