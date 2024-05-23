@@ -3,6 +3,8 @@ const dotenv = require('dotenv')
 const app = express()
 dotenv.config()
 
+const db = require('../database/db.js')
+
 app.listen(process.env.PORT,() => {
     console.log(`Server is running on port ${process.env.PORT}`)
 })
