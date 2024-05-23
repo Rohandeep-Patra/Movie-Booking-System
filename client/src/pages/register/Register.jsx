@@ -1,10 +1,21 @@
 import React from "react";
-import { Form } from "antd";
+import { Form,message } from "antd";
 import { NavLink } from "react-router-dom";
+import { RegisterUser } from "../../api/user.api.js";
 
 const Register = () => {
-  const onFinish = (values) => {
-    console.log("Submitted Successfully", values);
+  const onFinish = async (values) => {
+    try {
+      const response = await RegisterUser(values)
+      if(response.success){
+        message.success(response.message)
+      }else{
+        message.error(response.message)
+      }
+    } catch (error) {
+      message.error(error.message)
+    }
+
   };
 
   return (
