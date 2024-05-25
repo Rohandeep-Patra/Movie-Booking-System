@@ -9,6 +9,10 @@ const usersRoute = require('../routes/user.route.js')
 app.use("/api/users",usersRoute)
 
 
+const moviesRoute = require('../routes/movie.route.js')
+app.use("/api/movies",moviesRoute)
+
+
 const db = require('../database/db.js')
 
 app.listen(process.env.PORT,() => {

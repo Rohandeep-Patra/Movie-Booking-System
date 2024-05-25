@@ -51,7 +51,7 @@ const ProtectedRoute = ({ children }) => {
       <>
         <div className="">
           <div className="bg-slate-600 flex justify-between items-center p-4 px-6 m-1">
-            <div>
+            <div className=" cursor-pointer" onClick={()=>{navigate('/')}}>
               <h1 className=" text-xl font-poppins text-white">Free Movies</h1>
             </div>
             <div className="">
@@ -81,19 +81,31 @@ const ProtectedRoute = ({ children }) => {
                   <p className="px-3 py-2">Hello {user.name} !!</p>
                   <hr />
                   <div
-                    
+                    onClick={() => {
+                      if (user.isAdmin) {
+                        navigate("/admin");
+                      } else {
+                        navigate("/profile");
+                      }
+                    }}
                     className=" px-2 py-1 hover:bg-blue-100/30 rounded-md hover:font-medium hover:text-blue-800 hover:duration-500 flex items-center hover:cursor-pointer"
                   >
-                    <span class="material-symbols-outlined text-2xl">person</span><p className="ml-2">Profile</p>
+                    <span class="material-symbols-outlined text-2xl">
+                      person
+                    </span>
+                    <p className="ml-2">Profile</p>
                   </div>
                   <div
-                    onClick={() =>{
-                      localStorage.removeItem('token')
-                      navigate('/login')
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      navigate("/login");
                     }}
                     className=" px-2 py-2 hover:bg-blue-100/30 rounded-md hover:font-medium hover:text-blue-800 hover:duration-500 flex items-center ml-[2px] hover:cursor-pointer"
                   >
-                    <span class="material-symbols-outlined text-[22px] font-medium">logout</span><p className="ml-2 text-[15px]">Log Out</p>
+                    <span class="material-symbols-outlined text-[22px] font-medium">
+                      logout
+                    </span>
+                    <p className="ml-2 text-[15px]">Log Out</p>
                   </div>
                 </div>
               </Dropdown>

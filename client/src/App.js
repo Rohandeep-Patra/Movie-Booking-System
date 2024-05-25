@@ -5,6 +5,8 @@ import Login from "./pages/login/Login.jsx";
 import Register from "./pages/register/Register.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import { useSelector } from "react-redux";
+import Admin from "./pages/admin/Admin.jsx";
+import UserProfile from "./pages/userprofile/UserProfile.jsx";
 
 function App() {
   const {loading} = useSelector((state) => state.loaders)
@@ -21,6 +23,8 @@ function App() {
           <Route exact path="/" element={<ProtectedRoute><Home/></ProtectedRoute>} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register/>} />
+          <Route exact path="/admin" element={<ProtectedRoute><Admin/></ProtectedRoute>} />
+          <Route exact path="/profile" element={<ProtectedRoute><UserProfile/></ProtectedRoute>} />
           
         </Routes>
       </BrowserRouter>
